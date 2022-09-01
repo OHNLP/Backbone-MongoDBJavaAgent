@@ -11,6 +11,8 @@ public class MongoDBJavaAgent {
                 // Redefine AggregateIterableImpl to run sorts on disk by default
                 .type(ElementMatchers.named("com.mongodb.client.internal.AggregateIterableImpl"))
                 .transform((builder, type, ignored, ignored2) -> builder.field(ElementMatchers.named("allowDiskUse")).value(true))
+                .type(ElementMatchers.named("com.mongodb.operation.AggregateOperationImpl"))
+                .transform((builder, type, ignored, ignored2) -> builder.field(ElementMatchers.named("allowDiskUse")).value(true))
                 .installOn(inst);
     }
 }
